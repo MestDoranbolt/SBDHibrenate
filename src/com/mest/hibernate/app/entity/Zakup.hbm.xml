@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2018-01-19 22:38:12 by Hibernate Tools 5.2.6.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="ministrant_SBD" dynamic-insert="false" dynamic-update="false" mutable="true" name="Zakup" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="ZAKUP">
+        <composite-id class="ZakupId" mapped="false" name="id" unsaved-value="undefined">
+            <key-property name="idZakupu" type="int">
+                <column name="id_zakupu"/>
+            </key-property>
+            <key-property name="idProduktu" type="int">
+                <column name="id_produktu"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="Cennik" embed-xml="true" fetch="select" insert="false" name="cennik" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column name="id_produktu" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="Kasa" embed-xml="true" fetch="select" insert="false" name="kasa" not-found="exception" optimistic-lock="true" unique="false" update="false">
+            <column name="id_zakupu" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="ilosc" optimistic-lock="true" type="int" unique="false">
+            <column name="ilosc" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>
