@@ -6,6 +6,8 @@ package com.mest.hibernate.app.entity;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -133,7 +135,7 @@ public class Pracownik implements java.io.Serializable {
 		this.kwalifikacje = kwalifikacje;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "pracowniks")
+	@ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "pracowniks")
 	public Set<Wybieg> getWybiegs() {
 		return this.wybiegs;
 	}
@@ -142,7 +144,7 @@ public class Pracownik implements java.io.Serializable {
 		this.wybiegs = wybiegs;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
 	@JoinTable(name = "TRESURA", catalog = "ministrant_SBD", joinColumns = {
 			@JoinColumn(name = "id_pracownika", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "id_zwierzecia", nullable = false, updatable = false) })
@@ -172,4 +174,12 @@ public class Pracownik implements java.io.Serializable {
 		this.kasas = kasas;
 	}
 
+	@Override
+	public String toString() {
+		return "idPracownika=" + idPracownika + ", imie=" + imie + ", nazwisko=" + nazwisko
+				+ ", dataZatrudnienia=" + dataZatrudnienia + ", pensja=" + pensja + ", stanowisko=" + stanowisko
+				+ ", kwalifikacje=" + kwalifikacje;
+	}
+
+	
 }

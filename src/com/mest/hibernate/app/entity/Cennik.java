@@ -91,4 +91,9 @@ public class Cennik implements java.io.Serializable {
 		this.zakups = zakups;
 	}
 
+	@Override
+	public String toString() {
+		return "Cennik [idProduktu=" + idProduktu + ", nazwa=" + nazwa + ", cena=" + cena + ", opis=" + opis + "]";
+	}
+ 
 }

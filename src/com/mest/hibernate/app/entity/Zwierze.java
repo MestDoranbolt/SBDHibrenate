@@ -5,6 +5,8 @@ package com.mest.hibernate.app.entity;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -99,7 +101,7 @@ public class Zwierze implements java.io.Serializable {
 		this.potomstwo = potomstwo;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(cascade = {CascadeType.ALL})
 	@JoinTable(name = "ZAKWATEROWANIE", catalog = "ministrant_SBD", joinColumns = {
 			@JoinColumn(name = "id_zwierzecia", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "id_wybiegu", nullable = false, updatable = false) })
@@ -111,7 +113,7 @@ public class Zwierze implements java.io.Serializable {
 		this.wybiegs = wybiegs;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "zwierzes")
+	@ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "zwierzes")
 	public Set<Pracownik> getPracowniks() {
 		return this.pracowniks;
 	}
@@ -119,5 +121,13 @@ public class Zwierze implements java.io.Serializable {
 	public void setPracowniks(Set<Pracownik> pracowniks) {
 		this.pracowniks = pracowniks;
 	}
+
+	@Override
+	public String toString() {
+		return "Zwierze [idZwierzecia=" + idZwierzecia + ", gatunek=" + gatunek + ", plec=" + plec + ", imie=" + imie
+				+ ", potomstwo=" + potomstwo + "]";
+	}
+	
+	
 
 }
