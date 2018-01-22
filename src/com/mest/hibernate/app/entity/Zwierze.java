@@ -1,5 +1,7 @@
 package com.mest.hibernate.app.entity;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 // default package
 // Generated 2018-01-20 16:46:25 by Hibernate Tools 5.2.6.Final
 
@@ -11,7 +13,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -101,7 +102,7 @@ public class Zwierze implements java.io.Serializable {
 		this.potomstwo = potomstwo;
 	}
 
-	@ManyToMany(cascade = {CascadeType.ALL})
+	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinTable(name = "ZAKWATEROWANIE", catalog = "ministrant_SBD", joinColumns = {
 			@JoinColumn(name = "id_zwierzecia", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "id_wybiegu", nullable = false, updatable = false) })
@@ -113,7 +114,10 @@ public class Zwierze implements java.io.Serializable {
 		this.wybiegs = wybiegs;
 	}
 
-	@ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "zwierzes")
+	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+	@JoinTable(name = "TRESURA", catalog = "ministrant_SBD", joinColumns = {
+			@JoinColumn(name = "id_zwierzecia", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "id_pracownika", nullable = false, updatable = false) })
 	public Set<Pracownik> getPracowniks() {
 		return this.pracowniks;
 	}

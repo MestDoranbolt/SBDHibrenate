@@ -20,7 +20,7 @@ public class Man {
 		Zwierze zwierzetemp = new Zwierze("Gatunek", "Meska", "fafik", 1);
 		Zwierze zwierzetemp2 = new Zwierze("Masd", "asdasd", "Asdasd", 1);
 		Pracownik prac = session.get(Pracownik.class, 1);
-		Set
+		//Set
 		Set<Zwierze> zwierze = new HashSet<Zwierze>();
 		zwierze.add(zwierzetemp);
 

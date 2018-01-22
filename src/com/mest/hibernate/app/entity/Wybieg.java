@@ -5,6 +5,8 @@ package com.mest.hibernate.app.entity;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -86,7 +88,7 @@ public class Wybieg implements java.io.Serializable {
 		this.powierzchnia = powierzchnia;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
 	@JoinTable(name = "OPIEKA", catalog = "ministrant_SBD", joinColumns = {
 			@JoinColumn(name = "id_wybiegu", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "id_pracownika", nullable = false, updatable = false) })
@@ -98,7 +100,7 @@ public class Wybieg implements java.io.Serializable {
 		this.pracowniks = pracowniks;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "wybiegs")
+	@ManyToMany(cascade = {CascadeType.ALL}, mappedBy = "wybiegs")
 	public Set<Zwierze> getZwierzes() {
 		return this.zwierzes;
 	}
@@ -106,5 +108,12 @@ public class Wybieg implements java.io.Serializable {
 	public void setZwierzes(Set<Zwierze> zwierzes) {
 		this.zwierzes = zwierzes;
 	}
+
+	@Override
+	public String toString() {
+		return "Wybieg [idWybiegu=" + idWybiegu + ", temperatura=" + temperatura + ", sektor=" + sektor
+				+ ", powierzchnia=" + powierzchnia + "]";
+	}
+	
 
 }
